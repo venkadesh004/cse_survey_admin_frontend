@@ -16,15 +16,17 @@ const CourseExitSurvey = () => {
   const [code, setCode] = useState("All");
   const [courseCodes, setCourseCodes] = useState([]);
   const [currentComponent, setCurrentComponent] = useState(0);
+  const [report, setReport] = useState([]);
 
   const viewComponents = [
     <CourseExitSurveyDataView rows={rows} />,
-    <CourseExitSurveyChart />
+    <CourseExitSurveyChart report={report} />,
   ];
 
   const handleChange = (event) => {
     setLoading(true);
     setCode(event.target.value);
+    setCurrentComponent(0);
     if (event.target.value === "All") {
       axios
         .get("http://localhost:3000/courseExitSurvey/getData")
@@ -89,6 +91,18 @@ const CourseExitSurvey = () => {
       });
   }, []);
 
+  useEffect(() => {
+    console.log(code);
+    axios
+      .get("http://localhost:3000/courseExitSurvey/getCourseReport/" + code)
+      .then((result) => {
+        setReport(result.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [code]);
+
   const [items, setItems] = useState([
     <MenuItem value="All">
       <em>All</em>
@@ -99,7 +113,7 @@ const CourseExitSurvey = () => {
     <div className="flex items-center justify-center overflow-hidden">
       <div className="w-[20%]">
         <div className="flex items-center flex-col">
-          <h1>{rows.length} Responses</h1>
+          <h1 className="">{rows.length} Responses</h1>
           {courseCodes.length > 1 && (
             <FormControl sx={{ m: 1, minWidth: 80 }}>
               <InputLabel id="demo-simple-select-autowidth-label">
@@ -117,9 +131,19 @@ const CourseExitSurvey = () => {
               </Select>
             </FormControl>
           )}
-          <Button onClick={() => setCurrentComponent(0)}>View Data's</Button>
-          <Button onClick={() => setCurrentComponent(1)} disabled={code === "All" ? true : false}>View Analysis</Button>
-          <Button>Download Data</Button>
+          <Button onClick={() => setCurrentComponent(0)}>View Data</Button>
+          <Button
+            onClick={() => setCurrentComponent(1)}
+            disabled={code === "All" ? true : false}
+          >
+            View Analysis
+          </Button>
+          <Button
+            href="http://localhost:3000/courseExitSurvey/downloadData"
+            target="_blank"
+          >
+            Download Data
+          </Button>
         </div>
       </div>
       <div className="w-[80%]">
