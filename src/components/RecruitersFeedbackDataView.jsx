@@ -9,16 +9,32 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 
 const columns = [
-    { id: "_id", label: "Key", minWidth: 50 },
-    { id: "designation", label: "Designation", minWidth: 50 },
-    { id: "expert", label: "Expert", minWidth: 50 },
-    { id: "generalFeedback", label: "General Feedback", minWidth: 50 },
-    { id: "name", label: "Name", minWidth: 50 },
-    { id: "organizationName", label: "Organization Name", minWidth: 50 },
-    { id: "suggestions", label: "Suggestions", minWidth: 50 },
-  ];
+  { id: "_id", label: "Key", minWidth: 50 },
+  { id: "communication", label: "Communication", minWidth: 50 },
+  { id: "contemporaryKnowledge", label: "Contemporary Knowledge", minWidth: 50 },
+  { id: "criticalThinking", label: "Critical Thinking", minWidth: 50 },
+  { id: "design", label: "Design", minWidth: 50 },
+  { id: "designation", label: "Designation", minWidth: 50 },
+  { id: "email", label: "Email", minWidth: 50 },
+  { id: "exposureToIt", label: "Exposure To It", minWidth: 50 },
+  { id: "interpersonal", label: "Interpersonal", minWidth: 50 },
+  { id: "knowledge", label: "Knowledge", minWidth: 50 },
+  { id: "knowledgeAboutSPD", label: "Knowledge About SPD", minWidth: 50 },
+  { id: "leadership", label: "Leadership", minWidth: 50 },
+  { id: "lifeSkills", label: "Life Skills", minWidth: 50 },
+  { id: "name", label: "Name", minWidth: 50 },
+  { id: "organisationName", label: "Organisation Name", minWidth: 50 },
+  { id: "overallRating", label: "Overall Rating", minWidth: 50 },
+  { id: "problemSolving", label: "Problem Solving", minWidth: 50 },
+  { id: "professionalEthics", label: "Professional Ethics", minWidth: 50 },
+  { id: "programmingSkill", label: "Programming Skill", minWidth: 50 },
+  { id: "projectManagementSkills", label: "ProjectManagement Skills", minWidth: 50 },
+  { id: "suggestions", label: "Suggestions", minWidth: 50 },
+  { id: "systemEngineeringSkills", label: "System Engineering Skills", minWidth: 50 },
+  { id: "team", label: "Team", minWidth: 50 },
+];
 
-const PeerFeedbackDataView = ({ rows }) => {
+const RecruitersFeedbackDataView = ({ rows }) => {
   return (
     <div className="w-full">
       <Paper
@@ -71,4 +87,4 @@ const PeerFeedbackDataView = ({ rows }) => {
   );
 };
 
-export default PeerFeedbackDataView;
+export default RecruitersFeedbackDataView;
