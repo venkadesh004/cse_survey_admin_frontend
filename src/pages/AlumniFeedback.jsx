@@ -5,13 +5,15 @@ import Button from "@mui/material/Button";
 
 import AlumniFeedbackDataView from "../components/AlumniFeedbackDataView";
 
+import { getData, downloadData } from "../API/alumniFeedback";
+
 const AlumniFeedback = () => {
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/alumniFeedback/getData")
+      .get(getData)
       .then(async (result) => {
         console.log(result.data);
         setRows(result.data);
@@ -28,10 +30,7 @@ const AlumniFeedback = () => {
         <div className="flex items-center flex-col">
           <h1 className="">{rows.length} Responses</h1>
           <Button onClick={() => setCurrentComponent(0)}>View Data</Button>
-          <Button
-            href="http://localhost:3000/alumniFeedback/downloadData"
-            target="_blank"
-          >
+          <Button href={downloadData} target="_blank">
             Download Data
           </Button>
         </div>

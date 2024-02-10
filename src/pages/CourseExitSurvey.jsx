@@ -10,6 +10,8 @@ import Button from "@mui/material/Button";
 import CourseExitSurveyDataView from "../components/CourseExitSurveyDataView";
 import CourseExitSurveyChart from "../components/CourseExitSurveyChart";
 
+import { getData, getCourses, getCourseReport, getCourseFeedback, downloadReport } from "../API/courseExitSurveyAPI";
+
 const CourseExitSurvey = () => {
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -29,7 +31,7 @@ const CourseExitSurvey = () => {
     setCurrentComponent(0);
     if (event.target.value === "All") {
       axios
-        .get("http://localhost:3000/courseExitSurvey/getData")
+        .get(getData)
         .then((result) => {
           console.log(result.data);
           setRows(result.data);
@@ -41,7 +43,7 @@ const CourseExitSurvey = () => {
     } else {
       axios
         .get(
-          "http://localhost:3000/courseExitSurvey/getCourseFeedback/" +
+          getCourseFeedback +
             event.target.value
         )
         .then((result) => {
@@ -56,7 +58,7 @@ const CourseExitSurvey = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/courseExitSurvey/getData")
+      .get(getData)
       .then((result) => {
         console.log(result.data);
         setRows(result.data);
@@ -69,7 +71,7 @@ const CourseExitSurvey = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/courseExitSurvey/getCourses")
+      .get(getCourses)
       .then((result) => {
         console.log(result.data);
         setCourseCodes(result.data);
@@ -94,7 +96,7 @@ const CourseExitSurvey = () => {
   useEffect(() => {
     console.log(code);
     axios
-      .get("http://localhost:3000/courseExitSurvey/getCourseReport/" + code)
+      .get(getCourseReport + code)
       .then((result) => {
         setReport(result.data);
       })
@@ -139,7 +141,7 @@ const CourseExitSurvey = () => {
             View Analysis
           </Button>
           <Button
-            href="http://localhost:3000/courseExitSurvey/downloadData"
+            href={downloadReport}
             target="_blank"
           >
             Download Data

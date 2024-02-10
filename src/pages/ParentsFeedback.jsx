@@ -6,6 +6,8 @@ import Button from "@mui/material/Button";
 import ParentsFeedbackDataView from "../components/ParentsFeedbackDataView";
 import ParentsFeedbackChart from "../components/ParentsFeedbackChart";
 
+import { getData, getFeedback, downloadData } from "../API/parentsFeedback";
+
 const ParentsFeedback = () => {
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -19,12 +21,12 @@ const ParentsFeedback = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/parentsFeedback/getData")
+      .get(getData)
       .then(async (result) => {
         console.log(result.data);
         setRows(result.data);
         await axios
-          .get("http://localhost:3000/parentsFeedback/parentsFeedback")
+          .get(getFeedback)
           .then((output) => {
             setReport(output.data);
             setLoading(false);
@@ -43,7 +45,7 @@ const ParentsFeedback = () => {
           <Button onClick={() => setCurrentComponent(0)}>View Data</Button>
           <Button onClick={() => setCurrentComponent(1)}>View Analysis</Button>
           <Button
-            href="http://localhost:3000/parentsFeedback/downloadData"
+            href={downloadData}
             target="_blank"
           >
             Download Data
