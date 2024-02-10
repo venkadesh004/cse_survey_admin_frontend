@@ -1,1 +1,3 @@
-export const backendURL = "http://localhost:3000/";
+import "dotenv";
+
+export const backendURL = import.meta.env.VITE_API_KEY;
